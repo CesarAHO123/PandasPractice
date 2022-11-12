@@ -3,17 +3,16 @@ import json
 from types import SimpleNamespace
 
 
-def get_genres(row):
-    aux = []
-    aux2 = str(row.genres)
+def get_genre(row):
+    aux = ""
+    aux2 = str(row.genre)
     aux2 = aux2.replace('[', '')
     aux2 = aux2.replace(']', '')
     aux2 = aux2.replace('},', '}},')
     aux3 = aux2.split("},")
-    for genre in aux3:
-        x = json.loads(genre, object_hook=lambda d: SimpleNamespace(**d))
-        aux.append(x.name)
-    row.genres = aux
+    x = json.loads(aux3[0], object_hook=lambda d: SimpleNamespace(**d))
+    aux = x.name
+    row.genre = aux
     return row
 
 
@@ -37,8 +36,8 @@ data = data.drop(columns=["homepage", "production_countries",
 data = data.dropna().set_index("id").sort_values("id")
 data = data.loc[(data.budget > 10000) & (data.revenue > 100) &
                 (data.genres != "[]") & (data.keywords != "[]") & (data.vote_count > 100)]
-data = data.rename(columns={"vote_average": "score"})
-data = data.apply(get_genres, axis="columns")
+data = data.rename(columns={"vote_average": "score", "genres": "genre"})
+data = data.apply(get_genre, axis="columns")
 data = data.apply(get_keywords, axis="columns")
 data.to_csv("./CleanDB/top_movies_clean.csv")
 print(data)
