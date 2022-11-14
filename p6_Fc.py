@@ -28,9 +28,6 @@ y_pred_df["Predictions"] = ARIMAmodel.predict(
 y_pred_df.index = test.index
 y_pred_out = y_pred_df["Predictions"]
 plt.plot(y_pred_out, color='Yellow', label='Predicciones')
-plt.legend()
-
-
 #ARMAmodel = SARIMAX(y, order=(1, 0, 1))
 #ARMAmodel = ARMAmodel.fit()
 #y_pred = ARMAmodel.get_forecast(len(test.index))
@@ -46,3 +43,5 @@ plt.xlabel('Fecha de lanzamiento')
 plt.ylabel('Presupuesto')
 plt.xticks(rotation=45)
 plt.show()
+plt.savefig("img/p6_Forecasting.png")
+plt.close()
