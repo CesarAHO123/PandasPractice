@@ -17,7 +17,7 @@ data_aux = ols("budget ~ genre", data=data_test).fit()
 print(data_test)
 table = sm.stats.anova_lm(data_aux, typ=2)
 if table["PR(>F)"][0] < 0.005:
-    print("hay diferencias")
+    print("Hay diferencia en el dinero dado a cada genero")
 else:
-    print("No hay diferencias")
+    print("No hay diferencias en el dinero dado a cada genero")
 print(table)
