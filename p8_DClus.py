@@ -17,6 +17,7 @@ plt.scatter(centroids[:, 0], centroids[:, 1], c='red', s=50)
 plt.title("Puntuacion de las peliculas mas populares")
 plt.ylabel("Popularidad")
 plt.xlabel("Puntuacion")
-plt.show()
+
 plt.savefig("img/p8_clustering")
+plt.show()
 plt.close()
